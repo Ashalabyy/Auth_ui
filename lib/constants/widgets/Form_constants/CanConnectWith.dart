@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
-import '../../dimensions.dart' as diementions;
+import 'package:auth_ui/constants/size_config.dart';
 
 class CanConnectWith extends StatelessWidget {
+  const CanConnectWith({super.key});
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Container(
-          height: 1, // height: diementions.screenHeight! * 0.004,
-          width: diementions.screenwidth! * 0.2,
+          height: 1,
+          width: SizeConfig.screenWidth! * 0.2,
           color: Colors.grey,
         ),
-        Text('you can connect with'),
+        Text(
+          'you can connect with',
+          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                fontWeight: FontWeight.w400,
+              ),
+        ),
         Container(
           height: 1,
-          width: diementions.screenwidth! * 0.2,
+          width: SizeConfig.screenWidth! * 0.2,
           color: Colors.grey,
         ),
       ],

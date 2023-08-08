@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../constants.dart' as constants;
 
 class ForgetPassword extends StatelessWidget {
   final VoidCallback onpress;
@@ -16,10 +14,11 @@ class ForgetPassword extends StatelessWidget {
           onTap: onpress,
           child: Text(
             forgetPassword,
-            style: GoogleFonts.nunito(
-              fontWeight: FontWeight.w500,
-              color: constants.primaryColor,
-            ),
+            style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  color: Theme.of(context).secondaryHeaderColor,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w800,
+                ),
           ),
         ),
       ],

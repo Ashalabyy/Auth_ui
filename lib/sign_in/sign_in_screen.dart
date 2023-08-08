@@ -1,37 +1,29 @@
-import '../constants/dimensions.dart' as dieminstions;
-import '../constants/constants.dart' as constants;
+import 'package:auth_ui/constants/widgets/custom_app_bar.dart';
+
+import '../constants/size_config.dart';
+
 import 'package:flutter/material.dart';
 import 'components/body.dart';
 
 class SignIn extends StatelessWidget {
-  static const RouteName = '/SiginInScreen';
+  const SignIn({super.key});
+  static const routeName = '/SiginInScreen';
   @override
   Widget build(BuildContext context) {
-    dieminstions.init(context);
-    return Scaffold(
-      body: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              color: constants.primaryColor,
-            ),
+    SizeConfig().init(context);
+    return SafeArea(
+      child: Scaffold(
+        appBar: CustomAppBar(
+          titlewidget: Text(
+            'SIGN IN',
+            style: Theme.of(context).textTheme.bodyText2,
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
-                color: Colors.white,
-              ),
-              height: dieminstions.screenHeight! * 0.9,
-              child: Body(),
-            ),
-          ),
-        ],
+        ),
+        body: Container(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          height: SizeConfig.screenHeight! * 0.9,
+          child: const Body(),
+        ),
       ),
     );
   }

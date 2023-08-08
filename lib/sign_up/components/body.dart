@@ -1,16 +1,21 @@
-import 'package:auth_ui/constants/dimensions.dart' as diementions;
-import 'package:auth_ui/constants/widgets/Form_constants/SignUp_with_Google.dart';
-import 'package:auth_ui/constants/widgets/Form_constants/dont_or_already_have_account.dart';
-import 'package:auth_ui/constants/widgets/Form_constants/CanConnectWith.dart';
-import 'package:auth_ui/sign_in/sign_in_screen.dart';
+export 'package:auth_ui/constants/constants.dart';
+export 'package:flutter/material.dart';
 import 'package:auth_ui/sign_up/components/sign_up_form.dart';
+
+import '../../constants/widgets/Form_constants/CanConnectWith.dart';
+import '../../constants/widgets/Form_constants/SignUp_with_Google.dart';
+import '../../constants/widgets/custom_route_page.dart';
 import 'package:flutter/material.dart';
-import '../../constants/constants.dart' as constants;
+import 'package:auth_ui/constants/size_config.dart';
+import 'package:auth_ui/constants/widgets/Form_constants/dont_or_already_have_account.dart';
+
+import '../../sign_in/sign_in_screen.dart';
 
 class Body extends StatelessWidget {
+  const Body({super.key});
   @override
   Widget build(BuildContext context) {
-    diementions.init(context);
+    SizeConfig().init(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -18,32 +23,37 @@ class Body extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              const SizedBox(height: 44),
+              Text(
                 'Let\'s Get Started',
-                style: constants.headingStyle,
+                style: Theme.of(context).textTheme.headline1,
               ),
               SizedBox(
-                height: diementions.heightWith05(diementions.screenHeight!),
+                height: SizeConfig.heightWith03(),
               ),
-              const Text('create an account to get all features'),
-              SizedBox(
-                height: diementions.heightWith05(diementions.screenHeight!),
+              Text(
+                'create an account to get all features',
+                style: Theme.of(context).textTheme.bodyText1,
               ),
-              SignUpForm(),
               SizedBox(
-                height: diementions.heightWith05(diementions.screenHeight!),
+                height: SizeConfig.heightWith03(),
               ),
-              CanConnectWith(),
+              const SignUpForm(),
               SizedBox(
-                height: diementions.heightWith05(diementions.screenHeight!),
+                height: SizeConfig.heightWith03(),
               ),
-              SignUpWithGoogle(),
+              const CanConnectWith(),
               SizedBox(
-                height: diementions.heightWith05(diementions.screenHeight!),
+                height: SizeConfig.heightWith03(),
+              ),
+              const SignUpWithGoogle(),
+              SizedBox(
+                height: SizeConfig.heightWith03(),
               ),
               DontorHaveAcc(
                 onpress: () {
-                  Navigator.of(context).pushReplacementNamed(SignIn.RouteName);
+                  Navigator.pushReplacement(
+                      context, CustomRoute(child: const SignIn()));
                 },
                 text: 'Already have account ?',
                 text2: 'Sign in here',

@@ -1,19 +1,22 @@
-import 'package:auth_ui/constants/dimensions.dart' as diementions;
+import 'package:auth_ui/constants/size_config.dart';
 import 'package:auth_ui/constants/widgets/Form_constants/ForgetPassword.dart';
 import 'package:auth_ui/constants/widgets/Form_constants/SignUp_with_Google.dart';
 import 'package:auth_ui/constants/widgets/Form_constants/dont_or_already_have_account.dart';
-import 'package:auth_ui/reset_password/reset_password_Screen.dart';
+import 'package:auth_ui/forgot_password/forgot_password_screen.dart';
+
 import 'package:auth_ui/sign_in/components/sign_in_form.dart';
 import 'package:auth_ui/constants/widgets/Form_constants/CanConnectWith.dart';
 import 'package:auth_ui/sign_up/sign_up_screen.dart';
+import 'package:auth_ui/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../constants/constants.dart' as constants;
+
+import '../../constants/widgets/custom_route_page.dart';
 
 class Body extends StatelessWidget {
+  const Body({super.key});
   @override
   Widget build(BuildContext context) {
-    diementions.init(context);
+    SizeConfig().init(context);
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -21,45 +24,81 @@ class Body extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'welcome Back!',
-                style: constants.headingStyle,
+              Text(
+                'Welcome Back!',
+                style: Theme.of(context).textTheme.headline1,
               ),
               SizedBox(
-                height: diementions.heightWith05(diementions.screenHeight!),
+                height: SizeConfig.heightWith03(),
               ),
-              const Text('lets login for explore continue'),
-              SizedBox(
-                height: diementions.heightWith05(diementions.screenHeight!),
+              Text(
+                'lets login for explore continue',
+                style: Theme.of(context).textTheme.bodyText1,
               ),
-              SignInForm(),
               SizedBox(
-                height: diementions.heightWith05(diementions.screenHeight!),
+                height: SizeConfig.heightWith03(),
+              ),
+              const SignInForm(),
+              SizedBox(
+                height: SizeConfig.heightWith03(),
               ),
               ForgetPassword(
-                forgetPassword: 'Forget Password ?',
-                onpress: () {
-                  Navigator.of(context)
-                      .pushNamed(ResetPasswordScreen.RouteName);
-                },
-              ),
+                  forgetPassword: 'Forget Password ?',
+                  onpress: () {
+                    Navigator.push(
+                      context,
+                      CustomRoute(
+                        child: const ForgotPasswordScreen(),
+                      ),
+                    );
+                  }),
               SizedBox(
-                height: diementions.heightWith05(diementions.screenHeight!),
+                height: SizeConfig.heightWith03(),
               ),
-              CanConnectWith(),
+              const CanConnectWith(),
               SizedBox(
-                height: diementions.heightWith05(diementions.screenHeight!),
+                height: SizeConfig.heightWith03(),
               ),
-              SignUpWithGoogle(),
+              const SignUpWithGoogle(),
               SizedBox(
-                height: diementions.heightWith05(diementions.screenHeight!),
+                height: SizeConfig.heightWith03(),
               ),
               DontorHaveAcc(
                 onpress: () {
-                  Navigator.of(context).pushReplacementNamed(SignUp.RouteName);
+                  Navigator.pushReplacement(
+                    context,
+                    CustomRoute(
+                      child: SignUp(),
+                    ),
+                  );
                 },
                 text: 'Dont have account ?',
                 text2: 'Sign up here',
+              ),
+              SizedBox(
+                height: SizeConfig.heightWith03(),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        CustomRoute(
+                          child: const HomeScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'continue without Sign in ',
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Theme.of(context).secondaryHeaderColor,
+                            fontWeight: FontWeight.w900,
+                          ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

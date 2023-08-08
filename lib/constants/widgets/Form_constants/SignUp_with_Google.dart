@@ -1,29 +1,25 @@
+import 'package:auth_ui/constants/size_config.dart';
 import 'package:flutter/material.dart';
-import '../../dimensions.dart' as diementions;
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SignUpWithGoogle extends StatelessWidget {
   const SignUpWithGoogle({super.key});
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return ElevatedButton(
       onPressed: () {},
-      style: ButtonStyle(
-        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-            const EdgeInsets.all(12)),
-        elevation: MaterialStateProperty.all<double>(0),
-        backgroundColor: MaterialStateProperty.all<Color>(
-          Colors.white,
-        ),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
-            side: const BorderSide(color: Colors.grey),
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+            color: Colors.grey,
           ),
+          borderRadius: BorderRadius.circular(40),
         ),
       ),
       child: SizedBox(
-        height: diementions.screenHeight! * 0.05,
+        height: SizeConfig.heightWith03(),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -31,9 +27,9 @@ class SignUpWithGoogle extends StatelessWidget {
             const SizedBox(
               width: 5,
             ),
-            const Text(
+            Text(
               'Sign Up with Google',
-              style: TextStyle(color: Colors.black),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
           ],
         ),

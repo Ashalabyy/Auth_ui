@@ -1,30 +1,36 @@
-import 'package:auth_ui/password_updated/password_updated_Screen.dart';
-import 'package:auth_ui/reset_password/reset_password_Screen.dart';
+import 'package:auth_ui/provider/switch.dart';
 import 'package:auth_ui/sign_up/sign_up_screen.dart';
-import 'sign_in/sign_in_screen.dart';
-import 'package:auth_ui/constants/theme.dart';
+import 'package:provider/provider.dart';
+import 'app_router.dart';
+import './constants/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(
-    MyApp(),
+    MyApp(
+      appRouter: AppRouter(),
+    ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  final AppRouter appRouter;
+  const MyApp({required this.appRouter, super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: theme(),
-      home: PasswordUpdatedScreen(),
-      routes: {
-        PasswordUpdatedScreen.RouteName: (context) => PasswordUpdatedScreen(),
-        SignIn.RouteName: (context) => SignIn(),
-        SignUp.RouteName: (context) => SignUp(),
-        ResetPasswordScreen.RouteName: (context) => ResetPasswordScreen(),
-      },
+    return ChangeNotifierProvider(
+      create: (context) => SwitchState(),
+      child: Consumer<SwitchState>(
+        builder: (context, switchState, child) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Personal Expenses',
+          home: const SignUp(),
+          theme: switchState.isDark!
+              ? AppThemes.appThemeData[AppTheme.darkTheme]
+              : AppThemes.appThemeData[AppTheme.lightTheme],
+          onGenerateRoute: appRouter.onGenerateRoute,
+        ),
+      ),
     );
   }
 }
